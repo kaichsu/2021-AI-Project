@@ -4,4 +4,4 @@
 
 ## Combat issue:
 1. Don't have enemy power dataset.
-2. Same JSON attribute still unclear.
+2. Some JSON attribute still unclear.
