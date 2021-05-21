@@ -5,3 +5,6 @@
 ## Combat issue:
 1. Don't have enemy power dataset.
 2. Some JSON attribute still unclear.
+
+## Dataset Credit:
+[Slay_the_Spire_Reference](https://docs.google.com/spreadsheets/d/1ZsxNXebbELpcCi8N7FVOTNGdX_K9-BRC_LMgx4TORo4/edit#gid=1146624812)
