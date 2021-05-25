@@ -142,7 +142,6 @@ class SimpleAgent:
                 , 'Purifier': 0, 'Scrap Ooze': 1, 'Secret Portal': 0, 'Sensory Stone': 0, 'Shining Light': 0, 'The Ssssserpent': 0, 'Tomb of Lord Red Mask': 0, 'Transmogrifier': 0
                 , 'Upgrade Shrine' : 0,'Vampires' : 2,'We Meet Again' : 0,'Wheel of Change' : 0,'Winding Halls' : 1,'Wing Statue' : 0,'The Woman in Blue' : 0,'World of Goop' : 0}
             response = events_dict.get(self.game.screen.event_id)
-            time.sleep(1)
             if len(self.game.screen.options) == 1:
                 return ChooseAction(0)
             elif response != None:
