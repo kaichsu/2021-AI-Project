@@ -19,6 +19,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import Dropout
 from sklearn.preprocessing import MaxAbsScaler
 from sklearn.preprocessing import OneHotEncoder
+from keras.models import load_model
 
 """data processing"""
 
@@ -127,11 +128,9 @@ model.compile(
 X_scale=scale_X(X)
 Y_scale=scale_Y(Y)
 X_train, X_test, Y_train, Y_test = train_test_split(X_scale, Y_scale, test_size=0.2, shuffle=True)
-history = model.fit(X_train, Y_train, batch_size=32, epochs=2000, validation_split=0.2)
+model=load_model('AI_FP_ROUTE.h5')
+history = model.fit(X_train, Y_train, batch_size=32, epochs=100, validation_split=0.2)
 a=model.evaluate(X_train,Y_train,verbose=2)
 b=model.evaluate(X_test,Y_test,verbose=2)
-print(a[0])
-print(a[1])
 print(b[0])
-print(b[1])
 model.save('AI_FP_ROUTE.h5')
