@@ -45,12 +45,12 @@ def encode_sample_with_loop(sample):
   Encode a single sample into a 1D vector
   [{"cards": 10, "relics": 1, "ascension": 20, "character": "IRONCLAD", "floor": 0, "potions": 0, "path": "M", "max_hp": 82, "current_hp": 82, "gold": 99, "value": 2884.076040777472, "upgrade_cards": 0, "curse_cards": 1}
   """
-  character=encode_character(sample['character'])
+ # character=encode_character(sample['character'])
  # print(character)
   num_data = np.array([sample['cards'],sample['relics'],sample['ascension'],sample['floor'],sample['potions'],ord(sample['path']),sample['max_hp'],sample['current_hp'],sample['gold'],sample['upgrade_cards'],sample['curse_cards']])
-  x=np.concatenate((character, num_data))
+  #x=np.concatenate((character, num_data))
   #print(len(x))
-  return  x
+  return  num_data
 
 def preprocess_with_loop(data):
   preprocess_list=[]
@@ -107,7 +107,7 @@ def scale_Y(Y_data):
 """artifitial nerural network using tensorflow  極有可能會修改"""
 
 model=Sequential()
-model.add(Dense(1024,input_shape=(15,),activation='relu')) 
+model.add(Dense(1024,input_shape=(11,),activation='relu')) 
 model.add(Dropout(.8))
 model.add(Dense(512,activation='relu'))
 model.add(Dropout(.4))
@@ -129,7 +129,7 @@ X_scale=scale_X(X)
 Y_scale=scale_Y(Y)
 X_train, X_test, Y_train, Y_test = train_test_split(X_scale, Y_scale, test_size=0.2, shuffle=True)
 model=load_model('AI_FP_ROUTE.h5')
-history = model.fit(X_train, Y_train, batch_size=32, epochs=100, validation_split=0.2)
+history = model.fit(X_train, Y_train, batch_size=32, epochs=1000, validation_split=0.2)
 a=model.evaluate(X_train,Y_train,verbose=2)
 b=model.evaluate(X_test,Y_test,verbose=2)
 print(b[0])
