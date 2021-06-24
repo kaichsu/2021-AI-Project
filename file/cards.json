@@ -1,0 +1,244 @@
+{
+    {
+        "info": {
+            "Name": "Bash",
+            "Type": "Attack",
+            "Rarity": "Starter",
+            "Cost": 2
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed",
+                "times": "1",
+                "amount": 8,
+                "condition": []
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {
+            "monster": [{
+                "name": "Vulnerable",
+                "amount": 2
+            }],
+            "player": []
+        },
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Defend",
+            "Type": "Skill",
+            "Rarity": "Starter",
+            "Cost": 1
+        },
+        "damage": {},
+        "block": 5,
+        "energy": 0,
+        "buff": {},
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Strike",
+            "Type": "Skill",
+            "Rarity": "Starter",
+            "Cost": 1
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed",
+                "times": 1,
+                "amount": 6,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Anger",
+            "Type": "Attack",
+            "Rarity": "Common",
+            "Cost": 0
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed",
+                "times": 1,
+                "amount": 6,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {
+            "draw_pile": {},
+            "discard_pile": {
+                "target": "self",
+                "from": "all_card",
+                "place": "random",
+                "amount": 1
+            },
+            "exhaust_pile": {},
+            "hand": {},
+            "play": {},
+            "upgrade": {}
+        }
+    }, {
+        "info": {
+            "Name": "Armaments",
+            "Type": "Skill",
+            "Rarity": "Common",
+            "Cost": 1
+        },
+        "damage": {},
+        "block": 5,
+        "energy": 0,
+        "buff": {},
+        "card": {
+            "draw_pile": {},
+            "discard_pile": {},
+            "exhaust_pile": {},
+            "hand": {},
+            "play": {},
+            "upgrade": {
+                "target": "choosed",
+                "from": "hand",
+                "amount": 1
+            }
+        }
+    }, {
+        "info": {
+            "Name": "BodySlam",
+            "Type": "Attack",
+            "Rarity": "Common",
+            "Cost": 1
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed",
+                "times": 1,
+                "amount": -2,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Clash",
+            "Type": "Attack",
+            "Rarity": "Common",
+            "Cost": 0
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed"
+                "times": 1,
+                "amount": 14,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Cleave",
+            "Type": "Attack",
+            "Rarity": "Common",
+            "Cost": 1
+        },
+        "damage": {
+            "monster": {
+                "target": "all",
+                "times": 1,
+                "amount": 8,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Clothesline",
+            "Type": "Attack",
+            "Rarity": "Common",
+            "Cost": 2
+        },
+        "damage": {
+            "monster": {
+                "target": "choosed",
+                "times": 1,
+                "amount": 12,
+                "condition": {}
+            },
+            "player": {}
+        },
+        "block": 0,
+        "energy": 0,
+        "buff": {
+            "monster": [{
+                "name": "Weak",
+                "amount": 2,
+            }],
+            "player": []
+        },
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Flex",
+            "Type": "Skill",
+            "Rarity": "Common",
+            "Cost": 0
+        },
+        "damage": {},
+        "block": 0,
+        "energy": 0,
+        "buff": {
+            "monster": [],
+            "player": [{
+                "name": "Strength",
+                "amount": 2,
+            }]
+        },
+        "card": {}
+    }, {
+        "info": {
+            "Name": "Havoc",
+            "Type": "Skill",
+            "Rarity": "Common",
+            "Cost": 1
+        },
+        "damage": {},
+        "block": 0,
+        "energy": 0,
+        "buff": {},
+        "card": {
+            "draw_pile": {},
+            "discard_pile": {},
+            "exhaust_pile": {},
+            "hand": {},
+            "play": {
+                "target": "choosed",
+                "amount": 1,
+                "from": "draw_pile",
+                "place": "top"
+            },
+            "upgrade": {}
+        }
+    }
+}

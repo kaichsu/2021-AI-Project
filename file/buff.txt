@@ -1,0 +1,20 @@
+Can describe:
+    Ethereal, Exhaust: 不管？因為目前每次只管一個turn因此有沒有打、打完是不是丟入棄排都沒關係。
+    Wounds: 在cost中為unplayable，因此info中的cost為-2，遊玩中不會作為計算。
+    Entrench: 在block中,-2表示block數，即可表達。
+    Second Wind: 在block中,-3表示non-attack數，exhaust在card表示。
+    Limit Break: Double your Strength. Exhaust(Don't Exhaust).　(fuck 我不知道...)
+
+buff:
+    Battle Trance: Cannot draw additional cards this turn(抽卡部份在card中即可表示).
+    Rage: Whenever you play an Attack this turn, gain 3(5) Block.
+    Spot Weakness: If the enemy intends to attack, gain 3(4) Strength.
+    Double Tap: This turn, your next (2) Attack(s) is(are) played twice.
+    Dark Embrace: Whenever a card is Exhausted, draw 1 card.
+    Evolve: Whenever you draw a Status, draw 1(2) card(s).
+    Feel No Pain: Whenever a card is Exhausted, gain 3(4) Block.
+    Fire Breathing: Whenever you draw a Status or Curse card, deal 6(10) damage to all enemies.
+    Rupture: Whenever you lose HP from a card, gain 1(2) Strength.
+    Barricade: Block is not removed at the start of your turn.
+    Corruption: Skills cost 0. Whenever you play a Skill, Exhaust it.
+    Juggernaut: Whenever you gain Block, deal 5(7) damage to a random enemy.

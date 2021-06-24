@@ -1,0 +1,79 @@
+{
+    "info": {
+        "Name": ["Anger", "Armament"],
+        "type": ["Skill", "Attack", "Power"],
+        "cost": [0, 2, -1("x"), -2("unplayable")],
+        "Rarity": ["Starter", "Common"]
+    },
+    "damage": {
+        "monster": {
+            "target": ["choosed", "all", "ramdom"],
+            "times": [1, 3, -1("x")],
+            "amount": [2, -2("block"), -1],
+            "condition": {
+                "condtion1": "I don't know...",
+                "condtion2": "I don't know..."
+            }
+        },
+        "player": {
+            "amount": [-2, 0("-unblocked damage"), 2]
+        }
+    },
+    "block": [2, -2("block"), -1],
+    "buff": {
+        "monster": [{
+            "name": "Weak",
+            "amount": [-1, 0, 1]
+        }, {
+            "name": "Vulnerable",
+            "amount": [-1, 0, 1]
+        }],
+        "player": [{
+            "name": "Strength",
+            "amount": [-1, 0, 1]
+        }, {
+            "name": "Flame Barrier",
+            "amount": [-1, 0, 1]
+        }, {
+            "name": "Vulnerable",
+            "amount": [-1, 0, 1]
+        }]
+    },
+    "energy": [2, 0, -1("fomula")],
+    "card": {
+        "draw_pile": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")],
+            "from": ["discard_pile", "exhaust_pile", "hand", "colorless", "all_card"],
+            "place": ["random", "top", "down"]
+        },
+        "discard_pile": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")],
+            "from": ["draw_pile", "exhaust_pile", "hand", "colorless", "all_card"],
+            "place": ["random", "top", "down"]
+        },
+        "exhaust_pile": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")],
+            "from": ["discard_pile", "draw_pile", "hand", "colorless", "all_card"],
+            "place": ["random", "top", "down"]
+        },
+        "hand": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")],
+            "from": ["discard_pile", "exhaust_pile", "draw_pile", "colorless", "all_card"],
+            "place": ["random", "top", "down"]
+        },
+        "upgrade": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")]
+        },
+        "play": {
+            "target": ["choosed", "all", "ramdom", "attack", "non attack", "power", "self"],
+            "amount": [1, 3, -1, -2("c")],
+            "from": ["discard_pile", "exhaust_pile", "hand", "colorless", "all_card"],
+            "place": ["random", "top", "down"]
+        }
+    }
+}

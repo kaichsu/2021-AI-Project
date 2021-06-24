@@ -1,0 +1,71 @@
+{
+    "info": {
+        "Name": "string",
+        "Type": "string",
+        "Rarity": "string",
+        "Cost": "int"
+    },
+    "damage": {
+        "monster": {
+            "target": "string",
+            "times": "int",
+            "amount": "int",
+            "condition": {}
+        },
+        "player": {
+            "target": "string",
+            "times": "int",
+            "amount": "int",
+            "condition": {}
+        }
+    },
+    "block": "int",
+    "energy": "int",
+    "buff": {
+        "monster": [{
+            "name": "string",
+            "amount": "int"
+        }],
+        "player": [{
+            "name": "string",
+            "amount": "int"
+        }]
+    },
+    "card": {
+        "draw_pile": {
+            "from": "string",
+            "target": "string",
+            "place": "string",
+            "amount": "int"
+        },
+        "discard_pile": {
+            "from": "string",
+            "target": "string",
+            "place": "string",
+            "amount": "int"
+        },
+        "exhaust_pile": {
+            "from": "string",
+            "target": "string",
+            "place": "string",
+            "amount": "int"
+        },
+        "hand": {
+            "from": "string",
+            "target": "string",
+            "place": "string",
+            "amount": "int"
+        },
+        "play": {
+            "from": "string",
+            "target": "string",
+            "place": "string",
+            "amount": "int"
+        },
+        "upgrade": {
+            "from": "string",
+            "target": "string",
+            "amount": "int"
+        }
+    }
+}
