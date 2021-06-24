@@ -101,7 +101,7 @@ def scale_Y(Y_data):
   # Y_copy[Y_copy < 0] = 0 # No healing
 
   # Cap damage taken at 100
-  Y_copy[Y_copy > 100] = 100
+  Y_copy[Y_copy > 800] = 800
   return Y_copy
 
 """artifitial nerural network using tensorflow  極有可能會修改"""
@@ -129,7 +129,7 @@ X_scale=scale_X(X)
 Y_scale=scale_Y(Y)
 X_train, X_test, Y_train, Y_test = train_test_split(X_scale, Y_scale, test_size=0.2, shuffle=True)
 model=load_model('AI_FP_ROUTE.h5')
-history = model.fit(X_train, Y_train, batch_size=32, epochs=1000, validation_split=0.2)
+history = model.fit(X_train, Y_train, batch_size=32, epochs=2500, validation_split=0.2)
 a=model.evaluate(X_train,Y_train,verbose=2)
 b=model.evaluate(X_test,Y_test,verbose=2)
 print(b[0])
