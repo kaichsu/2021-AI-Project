@@ -24,7 +24,6 @@ class SimpleAgent:
         self.chosen_class = chosen_class
         self.priorities = Priority()
         self.change_class(chosen_class)
-        self.clear_json()
         self.brain = None
 
     def change_class(self, new_class):
@@ -243,28 +242,28 @@ class SimpleAgent:
             self.skipped_cards = True
             return CancelAction()
 
-    def generate_map_route(self):
-        node_rewards = self.priorities.MAP_NODE_PRIORITIES.get(self.game.act)
-        best_rewards = {0: {node.x: node_rewards[node.symbol] for node in self.game.map.nodes[0].values()}}
-        best_parents = {0: {node.x: 0 for node in self.game.map.nodes[0].values()}}
-        min_reward = min(node_rewards.values())
-        map_height = max(self.game.map.nodes.keys())
-        for y in range(0, map_height):
-            best_rewards[y+1] = {node.x: min_reward * 20 for node in self.game.map.nodes[y+1].values()}
-            best_parents[y+1] = {node.x: -1 for node in self.game.map.nodes[y+1].values()}
-            for x in best_rewards[y]:
-                node = self.game.map.get_node(x, y)
-                best_node_reward = best_rewards[y][x]
-                for child in node.children:
-                    test_child_reward = best_node_reward + node_rewards[child.symbol]
-                    if test_child_reward > best_rewards[y+1][child.x]:
-                        best_rewards[y+1][child.x] = test_child_reward
-                        best_parents[y+1][child.x] = node.x
-        best_path = [0] * (map_height + 1)
-        best_path[map_height] = max(best_rewards[map_height].keys(), key=lambda x: best_rewards[map_height][x])
-        for y in range(map_height, 0, -1):
-            best_path[y - 1] = best_parents[y][best_path[y]]
-        self.map_route = best_path
+    # def generate_map_route(self):
+    #     node_rewards = self.priorities.MAP_NODE_PRIORITIES.get(self.game.act)
+    #     best_rewards = {0: {node.x: node_rewards[node.symbol] for node in self.game.map.nodes[0].values()}}
+    #     best_parents = {0: {node.x: 0 for node in self.game.map.nodes[0].values()}}
+    #     min_reward = min(node_rewards.values())
+    #     map_height = max(self.game.map.nodes.keys())
+    #     for y in range(0, map_height):
+    #         best_rewards[y+1] = {node.x: min_reward * 20 for node in self.game.map.nodes[y+1].values()}
+    #         best_parents[y+1] = {node.x: -1 for node in self.game.map.nodes[y+1].values()}
+    #         for x in best_rewards[y]:
+    #             node = self.game.map.get_node(x, y)
+    #             best_node_reward = best_rewards[y][x]
+    #             for child in node.children:
+    #                 test_child_reward = best_node_reward + node_rewards[child.symbol]
+    #                 if test_child_reward > best_rewards[y+1][child.x]:
+    #                     best_rewards[y+1][child.x] = test_child_reward
+    #                     best_parents[y+1][child.x] = node.x
+    #     best_path = [0] * (map_height + 1)
+    #     best_path[map_height] = max(best_rewards[map_height].keys(), key=lambda x: best_rewards[map_height][x])
+    #     for y in range(map_height, 0, -1):
+    #         best_path[y - 1] = best_parents[y][best_path[y]]
+    #     self.map_route = best_path
 
         # def generate_map_route(self):
         #     node_rewards = self.priorities.MAP_NODE_PRIORITIES.get(self.game.act)
@@ -349,78 +348,59 @@ class SimpleAgent:
     def make_map_choice(self):
 
         if self.brain == None:
-            try:
-                self.brain = Route_ai()
-            except Exception as e:
-                with open('/home/august/github/temp/spirecomm/log/error.json', 'a') as file:
-                    json.dump({"error": str(e)}, file)
+            self.brain = Route_ai()
 
         mx = 0
         next_node_choose = 0
 
-        try:
-            self.get_map_route()
-            state = self.get_current_state()
-            with open('/home/august/github/temp/spirecomm/log/state.json', 'a') as file:
-                json.dump(state, file)
-            symbols = ['R', 'E', '$', '?', 'M', 'T']
-            node_rewards = dict()
-            try:
-                for symbol in symbols:
-                    state['path'] = symbol
-                    node_rewards[symbol] = self.brain.predict(state)
-            except Exception as e:
-                with open('/home/august/github/temp/spirecomm/log/error.json', 'a') as file:
-                    json.dump({"error": str(e)}, file)
-                node_rewards = {'R': 1000, 'E': 10, '$': 100, '?': 100, 'M': 1, 'T': 0}
+        state = self.get_current_state()
+        symbols = ['R', 'E', '$', '?', 'M', 'T']
+        node_rewards = dict()
 
-            for next_node in self.game.screen.next_nodes:
-                temp_mx = self.choose_best_route(node_rewards, next_node.x, next_node.y)
-                if temp_mx > mx:
-                    mx = temp_mx
-                    next_node_choose = next_node.x
-                with open('/home/august/github/temp/spirecomm/log/choosed.json', 'a') as file:
-                    file.write(str(mx))
+        try:
+            for symbol in symbols:
+                state['path'] = symbol
+                node_rewards[symbol] = self.brain.predict(state)
+        #should not happen
         except Exception as e:
-            with open('/home/august/github/temp/spirecomm/log/error.json', 'a') as file:
-                json.dump({"error": str(e)}, file)
+            node_rewards = self.priorities.MAP_NODE_PRIORITIES.get(self.game.act)
+
+        for next_node in self.game.screen.next_nodes:
+            temp_mx = self.choose_best_route(node_rewards, next_node.x, next_node.y)
+            if temp_mx > mx:
+                mx = temp_mx
+                next_node_choose = next_node.x
 
         for choice in self.game.screen.next_nodes:
             if choice.x == next_node_choose:
-                try:
-                    with open('/home/august/github/temp/spirecomm/log/choosed.json', 'a') as file:
-                        file.write(str(choice.x == next_node_choose))
-                except Exception as e:
-                    with open('/home/august/github/temp/spirecomm/log/error.json', 'a') as file:
-                        json.dump({"error": str(e)}, file)
                 return ChooseMapNodeAction(choice)
         # This should never happen
         return ChooseAction(0)
 
-    def get_map_route(self):
-        if self.game.screen.current_node.y == -1:
-            with open('/home/august/github/temp/spirecomm/log/map.json', 'a') as file:
-                file.write(str(self.game.map.nodes))
-        with open('/home/august/github/temp/spirecomm/log/current_node.json', 'a') as file:
-            file.write(str(self.game.screen.current_node))
-        with open('/home/august/github/temp/spirecomm/log/next_nodes.json', 'a') as file:
-            file.write(str(self.game.screen.next_nodes))
-        for next_node in self.game.screen.next_nodes:
-            node = self.game.map.get_node(next_node.x, next_node.y)
-            with open('/home/august/github/temp/spirecomm/log/next_nodes_info.json', 'a') as file:
-                file.write(str(node.symbol))
-
-    def clear_json(self):
-        file_names = [
-            '/home/august/github/temp/spirecomm/log/map.json',
-            '/home/august/github/temp/spirecomm/log/current_node.json',
-            '/home/august/github/temp/spirecomm/log/next_nodes.json',
-            '/home/august/github/temp/spirecomm/log/next_nodes_info.json',
-            '/home/august/github/temp/spirecomm/log/state.json',
-            '/home/august/github/temp/spirecomm/log/choosed.json',
-            '/home/august/github/temp/spirecomm/log/error.json'
-        ]
-
-        for file_name in file_names:
-            with open(file_name, 'w') as file:
-                file.write('')
+    # def get_map_route(self):
+    #     if self.game.screen.current_node.y == -1:
+    #         with open('/home/august/github/temp/spirecomm/log/map.json', 'a') as file:
+    #             file.write(str(self.game.map.nodes))
+    #     with open('/home/august/github/temp/spirecomm/log/current_node.json', 'a') as file:
+    #         file.write(str(self.game.screen.current_node))
+    #     with open('/home/august/github/temp/spirecomm/log/next_nodes.json', 'a') as file:
+    #         file.write(str(self.game.screen.next_nodes))
+    #     for next_node in self.game.screen.next_nodes:
+    #         node = self.game.map.get_node(next_node.x, next_node.y)
+    #         with open('/home/august/github/temp/spirecomm/log/next_nodes_info.json', 'a') as file:
+    #             file.write(str(node.symbol))
+    #
+    # def clear_json(self):
+    #     file_names = [
+    #         '/home/august/github/temp/spirecomm/log/map.json',
+    #         '/home/august/github/temp/spirecomm/log/current_node.json',
+    #         '/home/august/github/temp/spirecomm/log/next_nodes.json',
+    #         '/home/august/github/temp/spirecomm/log/next_nodes_info.json',
+    #         '/home/august/github/temp/spirecomm/log/state.json',
+    #         '/home/august/github/temp/spirecomm/log/choosed.json',
+    #         '/home/august/github/temp/spirecomm/log/error.json'
+    #     ]
+    #
+    #     for file_name in file_names:
+    #         with open(file_name, 'w') as file:
+    #             file.write('')
